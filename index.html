@@ -1,193 +1,163 @@
-<!-- Save this file as index.html -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Aura Apparel — Front-Design Project (By Adhiraj Singh)</title>
-  <meta name="description" content="Front-end web design assignment: elegant, responsive clothes shop homepage with live captions and interactive UI.">
+  <title>Aura Apparel — Front-Design Project (Adhiraj Singh)</title>
+  <meta name="description" content="Aura Apparel — responsive clothes-shop front page with cart, gallery, and live captions.">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* --------------------------
-       Design tokens
-    ---------------------------*/
     :root{
-      --bg1: #071021;
-      --bg2: #071732;
-      --card: rgba(255,255,255,0.03);
-      --glass: rgba(255,255,255,0.04);
-      --muted: #b9c6d7;
-      --accent: #ff6b6b;
-      --accent-2: #ffd166;
-      --radius: 14px;
-      --max: 1200px;
-      --glass-2: rgba(255,255,255,0.02);
+      --bg:#071022; --card:rgba(255,255,255,0.03); --muted:#aebed0;
+      --accent:#ff6b6b; --accent2:#ffd166; --max:1100px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background:linear-gradient(180deg,var(--bg1),var(--bg2));
-      color:#eaf2fb;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:28px 18px;
-      display:flex;
-      justify-content:center;
+      margin:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#eaf2fb;
+      background:linear-gradient(180deg,var(--bg),#041027);-webkit-font-smoothing:antialiased;
+      padding:18px;display:flex;justify-content:center;min-height:100vh;
     }
-    .wrap{width:100%;max-width:var(--max);}
+    .wrap{width:100%;max-width:var(--max);position:relative}
 
-    /* Top bar */
-    header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:56px;height:56px;border-radius:12px;
-      background:linear-gradient(135deg,var(--accent),#ff8aa3);
-      display:grid;place-items:center;font-weight:800;color:#06101a;font-size:18px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.6);
-    }
+    /* Header */
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ff8aa3);display:grid;place-items:center;font-weight:800;color:#07111a}
     .brand h1{margin:0;font-size:18px}
     .brand p{margin:0;color:var(--muted);font-size:12px}
+    .controls{display:flex;gap:8px;align-items:center}
 
-    .controls{display:flex;gap:10px;align-items:center}
-    .search{
-      display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;background:var(--glass);
-      min-width:220px;
-    }
-    .search input{background:transparent;border:0;color:inherit;outline:none;font-size:14px}
-    .btn{
-      padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted);cursor:pointer;font-weight:700;
-    }
-    .btn.primary{background:linear-gradient(90deg,var(--accent),#ff9f9f);color:#07121a;border:none}
+    .search{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:var(--card)}
+    .search input{border:0;background:transparent;color:inherit;outline:0;width:160px}
 
-    /* HERO */
-    .hero{
-      display:grid;grid-template-columns:1fr 420px;gap:22px;align-items:center;margin-bottom:22px;
-    }
-    .hero-card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:26px;border-radius:16px;backdrop-filter:blur(6px);box-shadow:0 12px 40px rgba(0,0,0,0.6);
-    }
-    .eyebrow{color:var(--accent-2);font-weight:800;font-size:13px}
-    .hero-title{font-size:36px;margin:8px 0 6px;line-height:1.02}
-    .subtitle{color:var(--muted);margin:8px 0 18px;max-width:70%}
-    .cta-row{display:flex;gap:12px;align-items:center}
+    .btn{padding:10px 12px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);cursor:pointer;color:var(--muted);font-weight:700}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#ff9f9f);border:none;color:#07121a}
 
-    /* live caption bar */
-    .caption-bar{
-      margin-top:14px;padding:12px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;gap:12px;border:1px solid rgba(255,255,255,0.03);
-    }
+    .cart-btn{position:relative;display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:12px;background:var(--card);cursor:pointer}
+    .cart-count{position:absolute;top:-6px;right:-6px;background:var(--accent);color:#07121a;padding:4px 8px;border-radius:999px;font-weight:800;font-size:12px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:center;margin-bottom:18px}
+    .hero-card{padding:22px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
+    .subtitle{color:var(--muted);margin-bottom:12px}
+
+    .caption-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);margin-top:12px}
     .caption-text{font-weight:700}
-    .caption-small{color:var(--muted);font-size:13px}
 
-    /* hero visual */
-    .hero-side{
-      border-radius:16px;padding:12px;background:linear-gradient(180deg,#061226,#071227);display:flex;flex-direction:column;gap:12px;align-items:center;
-    }
-    .showcase{width:100%;height:300px;border-radius:12px;background-size:cover;background-position:center;box-shadow:0 20px 40px rgba(0,0,0,0.6)}
-    .meta-row{display:flex;justify-content:space-between;width:100%;color:var(--muted);font-size:13px}
+    .showcase{border-radius:12px;overflow:hidden;height:300px;background:#091426;display:flex;align-items:center;justify-content:center}
+    .showcase img{width:100%;height:100%;object-fit:cover;display:block}
 
     /* categories */
-    .cats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
-    .chip{padding:8px 12px;border-radius:999px;background:var(--glass);cursor:pointer;border:1px solid rgba(255,255,255,0.03);font-weight:700;color:var(--muted)}
-    .chip.active{background:linear-gradient(90deg,#0b1220,#08121f);color:#fff;box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+    .cats{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    .chip{padding:8px 12px;border-radius:999px;background:var(--card);cursor:pointer;color:var(--muted);font-weight:700}
+    .chip.active{color:white;background:#081127}
 
-    /* grid */
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .18s ease, box-shadow .18s ease;overflow:hidden;
-    }
-    .card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,0.6)}
-    .thumb{height:220px;border-radius:10px;background-size:cover;background-position:center;margin-bottom:10px}
-    .p-title{margin:0;font-weight:700}
-    .p-desc{margin:6px 0;color:var(--muted);font-size:13px}
-    .price{font-weight:900;color:var(--accent);font-size:16px}
+    /* products grid */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .12s ease;will-change:transform}
+    .card:active{transform:translateY(-2px)}
+    .thumb{width:100%;height:200px;border-radius:10px;overflow:hidden;background:#071227}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .p-title{margin:8px 0 4px;font-weight:700}
+    .p-desc{color:var(--muted);font-size:13px;margin:0 0 10px}
+    .price{font-weight:900;color:var(--accent)}
 
-    /* quick modal */
-    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.7);visibility:hidden;opacity:0;transition:opacity .2s ease,visibility .2s;z-index:60}
+    /* gallery/testimonials/contact */
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .gallery img{width:100%;height:120px;object-fit:cover;border-radius:8px}
+    .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .test{background:var(--card);padding:12px;border-radius:10px;color:var(--muted)}
+    .contact-wrap{display:grid;grid-template-columns:1fr 320px;gap:18px}
+    .input,textarea{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    textarea{min-height:120px;resize:vertical}
+
+    footer{margin-top:28px;padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);visibility:hidden;opacity:0;transition:opacity .18s,visibility .18s;z-index:60;padding:20px}
     .modal.show{visibility:visible;opacity:1}
-    .modal-card{width:min(900px,96%);background:linear-gradient(180deg,#061225,#06111e);padding:18px;border-radius:12px;display:flex;gap:14px}
-    .modal-left{width:48%;height:420px;background-size:cover;background-position:center;border-radius:10px}
+    .modal-card{width:min(900px,96%);background:#061125;padding:16px;border-radius:12px;display:flex;gap:12px}
+    .modal-left{width:48%;height:380px;background:#071227;border-radius:10px;overflow:hidden}
+    .modal-left img{width:100%;height:100%;object-fit:cover}
     .modal-right{flex:1;color:var(--muted)}
-    .close-btn{position:absolute;right:20px;top:20px;background:rgba(255,255,255,0.04);border-radius:8px;padding:8px;cursor:pointer}
+    .close-btn{position:absolute;right:22px;top:22px;background:rgba(255,255,255,0.04);padding:8px;border-radius:8px;cursor:pointer}
 
-    /* contact */
-    footer{margin-top:22px;color:var(--muted);font-size:14px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);display:flex;justify-content:space-between;align-items:center;gap:10px}
-    .contact{display:flex;flex-direction:column;gap:8px}
-    .contact a{color:var(--accent-2);text-decoration:none;font-weight:700}
-
-    /* micro interactions */
-    .pulse{animation:pulse 1.6s infinite}
-    @keyframes pulse{0%{transform:translateY(0)}50%{transform:translateY(-3px)}100%{transform:translateY(0)}}
+    /* cart drawer */
+    .cart-drawer{position:fixed;right:0;top:0;height:100vh;width:360px;background:#061125;box-shadow:-20px 0 60px rgba(0,0,0,0.6);transform:translateX(112%);transition:transform .28s cubic-bezier(.2,.9,.2,1);z-index:120;padding:18px;overflow:auto}
+    .cart-drawer.open{transform:translateX(0)}
+    .cart-item{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+    .cart-item img{width:72px;height:72px;object-fit:cover;border-radius:8px}
+    .qty{display:flex;gap:6px;align-items:center}
 
     /* responsive */
     @media (max-width:980px){
       .hero{grid-template-columns:1fr}
       .grid{grid-template-columns:repeat(2,1fr)}
-      .showcase{height:220px}
+      .gallery{grid-template-columns:repeat(3,1fr)}
+      .contact-wrap{grid-template-columns:1fr}
+      .cart-drawer{width:92vw}
     }
     @media (max-width:640px){
-      header{flex-direction:column;align-items:stretch;gap:12px}
       .grid{grid-template-columns:1fr}
-      .showcase{height:180px}
-      .hero-side{order:2}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .test-grid{grid-template-columns:1fr}
+      .search input{width:110px}
     }
   </style>
 </head>
 <body>
-  <div class="wrap" role="document" aria-label="Aura Apparel homepage">
-    <!-- Header -->
+  <div class="wrap" role="document">
     <header>
-      <div class="brand" aria-hidden>
+      <div class="brand">
         <div class="logo">AA</div>
         <div>
           <h1>Aura Apparel</h1>
-          <p>Front-Design Project · Adhiraj Singh</p>
+          <p>Front-Design Project — Adhiraj Singh</p>
         </div>
       </div>
 
-      <div class="controls" role="navigation" aria-label="Main controls">
-        <div class="search" role="search" aria-label="Search products">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <input id="search" placeholder="Search clothing, styles..." />
+      <div class="controls" role="navigation">
+        <div class="search" role="search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-linecap="round"/></svg>
+          <input id="search" placeholder="Search products..." aria-label="Search products"/>
         </div>
-        <button class="btn" id="themeBtn" title="Toggle minimal accent">Theme</button>
-        <button class="btn primary" id="shopBtn">Shop</button>
+
+        <div class="cart-btn" id="cartBtn" aria-haspopup="dialog" title="Open cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 6h15l-1.5 9h-12L4 2H2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Cart</span>
+          <span class="cart-count" id="cartCount" aria-live="polite">0</span>
+        </div>
+
+        <button class="btn primary" id="shopNow">Shop</button>
       </div>
     </header>
 
     <!-- HERO -->
-    <section class="hero" aria-label="Hero section">
+    <section class="hero" aria-label="Hero">
       <div class="hero-card">
-        <div class="eyebrow">COLLECTION — Front Designs</div>
-        <h2 class="hero-title">Clean cuts. Bold accents. Designed for presence.</h2>
-        <p class="subtitle">A front-design concept: premium textures, deliberate seams, and minimal branding — created for your college design assignment.</p>
+        <div class="eyebrow" style="color:var(--accent2);font-weight:800">NEW DROP</div>
+        <h2>Clean cuts. Bold accents. Designed for presence.</h2>
+        <p class="subtitle">A front-design concept: premium textures and minimal branding. Campus friendly and assignment-ready.</p>
 
-        <div class="cta-row">
-          <button class="btn primary" id="startShop">Explore Collection</button>
-          <button class="btn" id="liveCapBtn" title="Use microphone for live captions">Enable Live Captions</button>
-          <button class="btn" id="speechToggle" style="display:none">Stop Captions</button>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button class="btn primary" id="exploreBtn">Explore Collection</button>
+          <button class="btn" id="liveCapBtn">Enable Live Captions</button>
         </div>
 
-        <!-- Live caption & rotating typewriter -->
-        <div class="caption-bar" aria-live="polite">
-          <div style="flex:1">
-            <div class="caption-small">Live caption / slogan</div>
-            <div class="caption-text" id="typewriter" aria-atomic="true"></div>
+        <div class="caption-bar" aria-live="polite" style="margin-top:12px">
+          <div>
+            <div style="font-size:12px;color:var(--muted)">Live caption / slogan</div>
+            <div class="caption-text" id="typewriter">Minimal fronts. Maximum impact.</div>
           </div>
-
-          <div style="min-width:160px;text-align:right">
-            <div class="caption-small">Mic status</div>
-            <div id="micStatus" style="font-weight:800;color:var(--accent-2)">Off</div>
+          <div style="text-align:right">
+            <div style="font-size:12px;color:var(--muted)">Mic</div>
+            <div id="micStatus" style="font-weight:800;color:var(--accent2)">Off</div>
           </div>
         </div>
 
-        <!-- categories -->
         <div class="cats" id="categories" aria-hidden>
           <div class="chip active" data-cat="all">All</div>
           <div class="chip" data-cat="tops">Tops</div>
@@ -197,269 +167,444 @@
         </div>
       </div>
 
-      <!-- right hero preview -->
-      <aside class="hero-side" aria-hidden>
-        <div class="showcase" id="showcase" style="background-image:url('https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1600&auto=format&fit=crop&s=7a1b2c3d4e5f6a7b8c9d0e1f');"></div>
-        <div class="meta-row">
-          <div><strong>Limited drop</strong><div style="color:var(--muted);font-size:13px">New fabrics • Clean seams</div></div>
-          <div style="text-align:right"><div style="color:var(--accent);font-weight:900">From ₹799</div><div style="color:var(--muted);font-size:13px">Free college shipping</div></div>
-        </div>
+      <aside class="showcase" aria-hidden>
+        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=60&w=1000&auto=format&fit=crop" alt="featured" loading="lazy"/>
       </aside>
     </section>
 
-    <!-- PRODUCTS GRID -->
+    <!-- PRODUCTS -->
     <main>
-      <div id="productGrid" class="grid" aria-live="polite" aria-label="Products">
-        <!-- JS will populate -->
+      <div class="section-head">
+        <h3>Featured products</h3>
+        <div style="color:var(--muted)">Curated selections • Campus drop</div>
       </div>
-    </main>
 
-    <!-- Quick view modal -->
-    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
-      <div class="modal-card" role="document">
-        <div class="modal-left" id="modalImg" style="background-image:url('');"></div>
-        <div class="modal-right">
-          <h3 id="modalTitle">Product</h3>
-          <p id="modalDesc" style="color:var(--muted)"></p>
-          <div style="margin-top:12px;font-weight:900;font-size:20px;color:var(--accent)" id="modalPrice">₹0</div>
-          <div style="margin-top:18px;display:flex;gap:12px">
-            <button class="btn primary" id="modalAdd">Add to cart</button>
-            <button class="btn" id="modalClose">Close</button>
+      <div id="productGrid" class="grid" aria-live="polite"></div>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="section-head" style="margin-top:18px">
+          <h3>About the design</h3>
+          <div style="color:var(--muted)">Concept & materials</div>
+        </div>
+        <p style="color:var(--muted);margin-top:10px">This project focuses on front-centred design details — clean seams, minimal branding and sustainable fabric choices where possible. Built as a responsive assignment for Front-End Web Designing.</p>
+      </section>
+
+      <!-- GALLERY -->
+      <section id="gallery">
+        <div class="section-head">
+          <h3>Gallery</h3>
+          <div style="color:var(--muted)">Campaign shots & texture closeups</div>
+        </div>
+        <div class="gallery" style="margin-top:12px">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1520975910394-9a3b7a2b2f23?q=60&w=900&auto=format&fit=crop" alt="gallery1" />
+          <img loading="lazy" src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=60&w=900&auto=format&fit=crop" alt="gallery2" />
+          <img loading="lazy" src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?q=60&w=900&auto=format&fit=crop" alt="gallery3" />
+          <img loading="lazy" src="https://images.unsplash.com/photo-1520975927108-9b1497a2d2a4?q=60&w=900&auto=format&fit=crop" alt="gallery4" />
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS -->
+      <section id="testimonials">
+        <div class="section-head" style="margin-top:18px">
+          <h3>What people say</h3>
+          <div style="color:var(--muted)">Quick student reviews</div>
+        </div>
+        <div class="test-grid" style="margin-top:12px">
+          <div class="test">“Great fit and fabric — campus-ready.” <div style="margin-top:8px;font-weight:700">— Riya</div></div>
+          <div class="test">“Stylish seams, loved the minimal front detail.” <div style="margin-top:8px;font-weight:700">— Aman</div></div>
+          <div class="test">“Affordable and looks premium in photos.” <div style="margin-top:8px;font-weight:700">— Priya</div></div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" style="margin-top:18px">
+        <div class="section-head">
+          <h3>Contact</h3>
+          <div style="color:var(--muted)">Questions? Submit feedback or project report link</div>
+        </div>
+
+        <div class="contact-wrap" style="margin-top:10px">
+          <form class="contact-form" id="contactForm" onsubmit="event.preventDefault(); alert('Thanks — message sent (demo).');">
+            <input class="input" placeholder="Your name" required />
+            <input class="input" placeholder="Your email" type="email" required />
+            <textarea placeholder="Message" required></textarea>
+            <div style="display:flex;gap:8px">
+              <button class="btn primary" type="submit">Send message</button>
+              <a class="btn" href="mailto:adhiraj.232092@sggscc.ac.in">Email me</a>
+            </div>
+          </form>
+
+          <div style="padding:12px;border-radius:10px;background:var(--card);height:100%">
+            <h4 style="margin:0 0 8px">Project by</h4>
+            <div style="font-weight:700">Adhiraj Singh</div>
+            <div style="color:var(--muted);margin-top:6px">adhiraj.232092@sggscc.ac.in</div>
+            <div style="margin-top:12px;color:var(--muted)">Submit link to your teacher or attach screenshots in your report.</div>
           </div>
         </div>
-        <button class="close-btn" id="modalX" aria-label="Close">✕</button>
-      </div>
-    </div>
+      </section>
+    </main>
 
-    <!-- Footer / contact -->
+    <!-- Footer -->
     <footer>
-      <div class="contact">
-        <div><strong>Project by:</strong> Adhiraj Singh</div>
-        <div>Email: <a href="mailto:adhiraj.232092@sggscc.ac.in">adhiraj.232092@sggscc.ac.in</a></div>
-      </div>
-      <div style="text-align:right;color:var(--muted);font-size:13px">
-        <div>Front-End Web Designing — Assignment</div>
-        <div style="margin-top:6px">Built with ❤️ — polished responsive UI</div>
-      </div>
+      <div>© <span id="year"></span> Aura Apparel — Front-End Assignment</div>
+      <div style="text-align:right;color:var(--muted)">Built by Adhiraj Singh • <a href="mailto:adhiraj.232092@sggscc.ac.in" style="color:var(--accent2);text-decoration:none">adhiraj.232092@sggscc.ac.in</a></div>
     </footer>
   </div>
 
+  <!-- Quick view modal -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true">
+      <div class="modal-left"><img id="modalImg" src="" alt="product"/></div>
+      <div class="modal-right">
+        <h3 id="modalTitle">Product</h3>
+        <p id="modalDesc" style="color:var(--muted)"></p>
+        <div id="modalPrice" style="margin-top:8px;font-weight:900;color:var(--accent)"></div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn primary" id="addToCartModal">Add to cart</button>
+          <button class="btn" id="closeModalBtn">Close</button>
+        </div>
+      </div>
+      <button class="close-btn" id="modalX" aria-label="Close">✕</button>
+    </div>
+  </div>
+
+  <!-- CART DRAWER -->
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true" aria-label="Shopping cart">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3 style="margin:0">Your cart</h3>
+      <button class="btn" id="closeCartBtn">Close</button>
+    </div>
+
+    <div id="cartItems" style="margin-top:12px"></div>
+
+    <div class="cart-footer" style="margin-top:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-weight:900">Total</div>
+        <div id="grandTotal" style="font-weight:900;color:var(--accent)">₹0</div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="btn primary" id="checkoutBtn">Checkout</button>
+        <button class="btn" id="clearCartBtn">Clear cart</button>
+      </div>
+    </div>
+  </aside>
+
   <script>
-    /* ------------------------------
-       Sample product data (replace if needed)
-       ------------------------------ */
+    // Utilities
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
+    const formatINR = n => '₹' + Number(n).toLocaleString('en-IN');
+
+    // DOM caches
+    const productGrid = $('#productGrid');
+    const searchInput = $('#search');
+    const categories = $('#categories');
+    const cartBtn = $('#cartBtn');
+    const cartCountEl = $('#cartCount');
+    const cartDrawer = $('#cartDrawer');
+    const cartItemsEl = $('#cartItems');
+    const grandTotalEl = $('#grandTotal');
+    const checkoutBtn = $('#checkoutBtn');
+    const clearCartBtn = $('#clearCartBtn');
+    const closeCartBtn = $('#closeCartBtn');
+
+    const modal = $('#modal');
+    const modalImg = $('#modalImg');
+    const modalTitle = $('#modalTitle');
+    const modalDesc = $('#modalDesc');
+    const modalPrice = $('#modalPrice');
+    const modalX = $('#modalX');
+    const closeModalBtn = $('#closeModalBtn');
+    const addToCartModal = $('#addToCartModal');
+
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Product data (distinct images, lower-res)
     const products = [
-      {id:1,title:'Crisp White Tee',desc:'Slim cotton tee — front seam detail',price:799,cat:'tops',img:'https://images.unsplash.com/photo-1520975910394-9a3b7a2b2f23?q=80&w=1200&auto=format&fit=crop&s=3d3b2c1a2f9a'},
-      {id:2,title:'Indigo Denim',desc:'Straight fit denim — structured front',price:2499,cat:'bottoms',img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1200&auto=format&fit=crop&s=1a2b3c4d5e6f'},
-      {id:3,title:'Lightweight Shell',desc:'Tech shell with minimal zipper',price:3499,cat:'outer',img:'https://images.unsplash.com/photo-1541099649105-7a1b2c3d4e5f?q=80&w=1200&auto=format&fit=crop&s=2b3c4d5e6f7a'},
-      {id:4,title:'Striped Shirt',desc:'Button-down with chest detail',price:1199,cat:'tops',img:'https://images.unsplash.com/photo-1520975927108-9b1497a2d2a4?q=80&w=1200&auto=format&fit=crop&s=4a5b6c7d8e9f'},
-      {id:5,title:'Casual Shorts',desc:'Stretch cotton — campus friendly',price:999,cat:'bottoms',img:'https://images.unsplash.com/photo-1503342452485-86d2e9c3f1af?q=80&w=1200&auto=format&fit=crop&s=5b6c7d8e9f0a'},
-      {id:6,title:'Minimal Cap',desc:'Embossed logo — adjustable',price:499,cat:'accessories',img:'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop&s=6a7b8c9d0e1f'}
+      {id:1,title:'Crisp White Tee',desc:'Slim cotton tee — front seam detail',price:799,cat:'tops',img:'https://images.unsplash.com/photo-1520975910394-9a3b7a2b2f23?q=60&w=900&auto=format&fit=crop'},
+      {id:2,title:'Indigo Denim',desc:'Straight fit denim — structured front',price:2499,cat:'bottoms',img:'https://images.unsplash.com/photo-1523381211113-3e0b6a8f1f66?q=60&w=900&auto=format&fit=crop'},
+      {id:3,title:'Lightweight Shell',desc:'Tech shell with minimal zipper',price:3499,cat:'outer',img:'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=60&w=900&auto=format&fit=crop'},
+      {id:4,title:'Striped Shirt',desc:'Button-down with chest detail',price:1199,cat:'tops',img:'https://images.unsplash.com/photo-1520975927108-9b1497a2d2a4?q=60&w=900&auto=format&fit=crop'},
+      {id:5,title:'Casual Shorts',desc:'Stretch cotton — campus friendly',price:999,cat:'bottoms',img:'https://images.unsplash.com/photo-1503342452485-86d2e9c3f1af?q=60&w=900&auto=format&fit=crop'},
+      {id:6,title:'Minimal Cap',desc:'Embossed logo — adjustable',price:499,cat:'accessories',img:'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=60&w=900&auto=format&fit=crop'},
+      {id:7,title:'Grey Hoodie',desc:'Soft fleece & front pocket',price:1599,cat:'tops',img:'https://images.unsplash.com/photo-1541392251325-3a64f54b5a3d?q=60&w=900&auto=format&fit=crop'},
+      {id:8,title:'Cargo Pants',desc:'Utility pockets, relaxed fit',price:1999,cat:'bottoms',img:'https://images.unsplash.com/photo-1514996937319-344454492b37?q=60&w=900&auto=format&fit=crop'},
+      {id:9,title:'Track Jacket',desc:'Retro track jacket with stripe',price:2199,cat:'outer',img:'https://images.unsplash.com/photo-1600180758898-9b9b6f5f8a1a?q=60&w=900&auto=format&fit=crop'}
     ];
 
-    /* ------------------------------
-       Render grid
-       ------------------------------ */
-    const grid = document.getElementById('productGrid');
-    function render(list){
-      grid.innerHTML = '';
-      list.forEach(p=>{
-        const el = document.createElement('article');
-        el.className = 'card';
-        el.innerHTML = `
-          <div class="thumb" style="background-image:url('${p.img}')" aria-hidden></div>
+    // CART (localStorage)
+    const CART_KEY = 'aura_cart_v1';
+    let cart = (function(){
+      try {
+        const raw = localStorage.getItem(CART_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch(e){ return {}; }
+    })();
+
+    function saveCart(){ try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch(e){} }
+    function cartCount(){ return Object.values(cart).reduce((s,q)=>s+q,0); }
+
+    // Render product grid efficiently using fragment
+    function renderProducts(list){
+      productGrid.innerHTML = '';
+      const frag = document.createDocumentFragment();
+      for(const p of list){
+        const article = document.createElement('article');
+        article.className = 'card';
+        // build inner using template literal but avoid heavy innerHTML in loops when possible
+        article.innerHTML = `
+          <div class="thumb"><img loading="lazy" src="${p.img}" alt="${p.title}"></div>
           <h4 class="p-title">${p.title}</h4>
           <p class="p-desc">${p.desc}</p>
           <div style="display:flex;justify-content:space-between;align-items:center">
-            <div class="price">₹${p.price.toLocaleString('en-IN')}</div>
+            <div class="price">${formatINR(p.price)}</div>
             <div style="display:flex;gap:8px">
               <button class="btn" data-id="${p.id}" data-action="view">Quick</button>
               <button class="btn primary" data-id="${p.id}" data-action="add">Add</button>
             </div>
           </div>
         `;
-        grid.appendChild(el);
-      });
+        frag.appendChild(article);
+      }
+      productGrid.appendChild(frag);
     }
-    render(products);
 
-    /* ------------------------------
-       Category filtering
-       ------------------------------ */
-    document.getElementById('categories').addEventListener('click', e=>{
+    // Initial render
+    renderProducts(products);
+
+    // Search (debounced)
+    function debounce(fn, wait=200){
+      let t;
+      return (...a)=>{ clearTimeout(t); t = setTimeout(()=>fn(...a), wait); };
+    }
+    searchInput.addEventListener('input', debounce(e=>{
+      const q = e.target.value.trim().toLowerCase();
+      if(!q) return renderProducts(products);
+      const filtered = products.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+      renderProducts(filtered);
+    }, 200));
+
+    // Category filter
+    categories.addEventListener('click', (e)=>{
       const chip = e.target.closest('.chip');
       if(!chip) return;
-      document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      $$('.chip').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       const cat = chip.dataset.cat;
-      if(cat === 'all') render(products);
-      else render(products.filter(p=>p.cat === cat));
+      if(cat === 'all') renderProducts(products);
+      else renderProducts(products.filter(p=>p.cat===cat));
     });
 
-    /* ------------------------------
-       Buttons for quick view and add
-       ------------------------------ */
-    let cart = 0;
-    grid.addEventListener('click', e=>{
-      const btn = e.target.closest('button');
-      if(!btn) return;
-      const action = btn.dataset.action;
-      const id = Number(btn.dataset.id);
-      const product = products.find(p=>p.id===id);
-      if(action === 'add'){
-        cart++;
-        btn.textContent = 'Added ✓';
-        setTimeout(()=> btn.textContent = 'Add',900);
-      } else if(action === 'view'){
-        openModal(product);
-      }
-    });
-
-    /* ------------------------------
-       Modal logic
-       ------------------------------ */
-    const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalPrice = document.getElementById('modalPrice');
-    const modalX = document.getElementById('modalX');
-    const modalClose = document.getElementById('modalClose');
-    const modalAdd = document.getElementById('modalAdd');
-
-    let current = null;
+    // Modal logic
+    let currentProduct = null;
     function openModal(p){
-      current = p;
-      modalImg.style.backgroundImage = `url('${p.img}')`;
+      currentProduct = p;
+      modalImg.src = p.img;
       modalTitle.textContent = p.title;
       modalDesc.textContent = p.desc;
-      modalPrice.textContent = '₹' + p.price.toLocaleString('en-IN');
+      modalPrice.textContent = formatINR(p.price);
       modal.classList.add('show');
       modal.setAttribute('aria-hidden','false');
     }
     function closeModal(){
       modal.classList.remove('show');
       modal.setAttribute('aria-hidden','true');
+      currentProduct = null;
     }
-    modalX.addEventListener('click', closeModal);
-    modalClose.addEventListener('click', closeModal);
-    modalAdd.addEventListener('click', ()=>{
-      if(!current) return;
-      cart++;
-      modalAdd.textContent = 'Added ✓';
-      setTimeout(()=> modalAdd.textContent = 'Add to cart',900);
-    });
-    modal.addEventListener('click', e=>{
-      if(e.target === modal) closeModal();
+
+    // Event delegation for product add/view
+    document.addEventListener('click', (e)=>{
+      const btn = e.target.closest('button');
+      if(!btn) return;
+      const action = btn.dataset.action;
+      const id = btn.dataset.id ? Number(btn.dataset.id) : null;
+
+      if(action === 'add' && id){
+        addToCart(id,1);
+        // small feedback
+        btn.textContent = 'Added ✓';
+        btn.disabled = true;
+        setTimeout(()=>{ btn.textContent = 'Add'; btn.disabled = false; }, 700);
+      } else if(action === 'view' && id){
+        const p = products.find(x=>x.id===id);
+        if(p) openModal(p);
+      }
     });
 
-    /* ------------------------------
-       Animated Typewriter + rotating slogans
-       ------------------------------ */
-    const typeEl = document.getElementById('typewriter');
+    // Modal controls
+    modalX.addEventListener('click', closeModal);
+    closeModalBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+    // CART functions
+    function updateCartUI(){
+      cartCountEl.textContent = cartCount();
+      cartItemsEl.innerHTML = '';
+      const ids = Object.keys(cart).map(Number);
+      if(ids.length === 0){
+        cartItemsEl.innerHTML = `<div style="color:var(--muted);padding:12px">Your cart is empty.</div>`;
+        grandTotalEl.textContent = formatINR(0);
+        return;
+      }
+      let total = 0;
+      const frag = document.createDocumentFragment();
+      for(const id of ids){
+        const qty = cart[id];
+        const p = products.find(x=>x.id===id);
+        const line = document.createElement('div');
+        line.className = 'cart-item';
+        const lineHTML = `
+          <img src="${p.img}" alt="${p.title}" loading="lazy"/>
+          <div style="flex:1">
+            <div style="font-weight:800">${p.title}</div>
+            <div style="color:var(--muted);font-size:13px">${formatINR(p.price)} • ${p.desc}</div>
+            <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+              <div class="qty">
+                <button data-action="dec" data-id="${id}">-</button>
+                <div style="min-width:28px;text-align:center">${qty}</div>
+                <button data-action="inc" data-id="${id}">+</button>
+              </div>
+              <div style="font-weight:900">${formatINR(p.price * qty)}</div>
+            </div>
+          </div>
+          <button class="btn" data-action="remove" data-id="${id}">Remove</button>
+        `;
+        line.innerHTML = lineHTML;
+        frag.appendChild(line);
+        total += p.price * qty;
+      }
+      cartItemsEl.appendChild(frag);
+      grandTotalEl.textContent = formatINR(total);
+      saveCart();
+    }
+
+    function addToCart(id, qty=1){
+      cart[id] = (cart[id] || 0) + qty;
+      updateCartUI();
+      // animate cart button
+      cartBtn.animate([{transform:'translateY(-6px)'},{transform:'translateY(0)'}],{duration:260});
+    }
+
+    // Cart drawer open/close
+    cartBtn.addEventListener('click', ()=>{ cartDrawer.classList.add('open'); cartDrawer.setAttribute('aria-hidden','false'); updateCartUI(); });
+    closeCartBtn.addEventListener('click', ()=>{ cartDrawer.classList.remove('open'); cartDrawer.setAttribute('aria-hidden','true'); });
+
+    // Cart actions (delegate)
+    cartItemsEl.addEventListener('click', (e)=>{
+      const btn = e.target.closest('button');
+      if(!btn) return;
+      const action = btn.dataset.action;
+      const id = Number(btn.dataset.id);
+      if(action === 'remove'){ delete cart[id]; updateCartUI(); }
+      else if(action === 'inc'){ cart[id] = (cart[id] || 0) + 1; updateCartUI(); }
+      else if(action === 'dec'){ cart[id] = Math.max(0, (cart[id] || 0) - 1); if(cart[id] === 0) delete cart[id]; updateCartUI(); }
+    });
+
+    clearCartBtn.addEventListener('click', ()=>{ if(confirm('Clear cart?')){ cart = {}; saveCart(); updateCartUI(); cartDrawer.classList.remove('open'); } });
+
+    checkoutBtn.addEventListener('click', ()=>{
+      const ids = Object.keys(cart).map(Number);
+      if(ids.length === 0){ alert('Your cart is empty.'); return; }
+      let subtotal = 0;
+      let summary = 'Order summary:\\n\\n';
+      for(const id of ids){
+        const p = products.find(x=>x.id===id);
+        const qty = cart[id];
+        summary += `${p.title} x${qty} — ${formatINR(p.price * qty)}\\n`;
+        subtotal += p.price * qty;
+      }
+      summary += `\\nSubtotal: ${formatINR(subtotal)}\\n\\n(Mock checkout — confirm?)`;
+      if(confirm(summary)){
+        alert('Order placed (demo). Thank you!');
+        cart = {}; saveCart(); updateCartUI(); cartDrawer.classList.remove('open');
+      }
+    });
+
+    // Hook modal add-to-cart button
+    addToCartModal.addEventListener('click', ()=>{
+      if(!currentProduct) return;
+      addToCart(currentProduct.id, 1);
+      addToCartModal.textContent = 'Added ✓';
+      setTimeout(()=> addToCartModal.textContent = 'Add to cart', 700);
+    });
+
+    // Search & category defaults already set. keep products visible
+    updateCartUI();
+
+    // Typewriter (debounced, light)
+    const typeEl = $('#typewriter');
     const slogans = [
       "Minimal fronts. Maximum impact.",
       "Designed for campus. Styled for life.",
       "Seams that speak — front-design focus.",
-      "Sustainable fabric. Clean finishes.",
       "Timeless silhouettes, student budget friendly."
     ];
-    let sIdx = 0;
-    let chIdx = 0;
-    let deleting = false;
-    let delay = 45;
-
-    function typeLoop(){
-      const text = slogans[sIdx];
-      if(!deleting){
-        chIdx++;
-        typeEl.textContent = text.slice(0,chIdx);
-        if(chIdx === text.length){ deleting = true; setTimeout(typeLoop, 1200); return; }
-        setTimeout(typeLoop, delay);
+    let tIdx = 0, ch = 0, del = false;
+    (function tw(){
+      const txt = slogans[tIdx];
+      if(!del){
+        ch++; typeEl.textContent = txt.slice(0,ch);
+        if(ch === txt.length){ del = true; setTimeout(tw,900); return; }
+        setTimeout(tw,36);
       } else {
-        chIdx--;
-        typeEl.textContent = text.slice(0,chIdx);
-        if(chIdx === 0){ deleting = false; sIdx = (sIdx+1)%slogans.length; setTimeout(typeLoop, 300); return; }
-        setTimeout(typeLoop, delay/1.2);
+        ch--; typeEl.textContent = txt.slice(0,ch);
+        if(ch === 0){ del = false; tIdx = (tIdx+1) % slogans.length; setTimeout(tw,300); return; }
+        setTimeout(tw,22);
       }
-    }
-    typeLoop();
+    })();
 
-    /* ------------------------------
-       Optional: Web Speech API for live captions
-       ------------------------------ */
-    const liveBtn = document.getElementById('liveCapBtn');
-    const speechToggle = document.getElementById('speechToggle');
-    const micStatus = document.getElementById('micStatus');
+    // Speech recognition (throttled updates)
+    const liveBtn = $('#liveCapBtn');
+    const micStatus = $('#micStatus');
     let recognition = null;
     let recognizing = false;
-
-    // feature detect
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
-    if(SpeechRecognition){
-      recognition = new SpeechRecognition();
-      recognition.lang = 'en-US';
-      recognition.interimResults = true;
-      recognition.maxAlternatives = 1;
-      recognition.continuous = true;
-
-      recognition.onstart = ()=> { recognizing = true; micStatus.textContent = 'On'; speechToggle.style.display = 'inline-block'; liveBtn.style.display='none'; };
-      recognition.onend = ()=> { recognizing = false; micStatus.textContent = 'Off'; speechToggle.style.display = 'none'; liveBtn.style.display='inline-block'; };
-      recognition.onerror = (e)=> { console.warn('Speech error', e); recognizing = false; micStatus.textContent = 'Error'; speechToggle.style.display = 'none'; liveBtn.style.display='inline-block'; };
-
-      recognition.onresult = (ev)=>{
-        // build text from interim + final
-        let text = '';
-        for(let i = ev.resultIndex; i < ev.results.length; i++){
-          text += ev.results[i][0].transcript;
-        }
-        // show in caption + also append small visual
-        typeEl.textContent = text;
-      };
-    } else {
-      // hide live capture button if not supported
-      liveBtn.title = "Live speech captions are not supported in this browser";
-      liveBtn.style.opacity = 0.9;
-    }
+    try {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+      if(SR){
+        recognition = new SR();
+        recognition.lang = 'en-IN';
+        recognition.interimResults = true;
+        recognition.continuous = true;
+        let last = 0;
+        recognition.onresult = (ev) => {
+          let text = '';
+          for(let i=ev.resultIndex;i<ev.results.length;i++) text += ev.results[i][0].transcript;
+          const now = Date.now();
+          if(now - last > 180){
+            typeEl.textContent = text;
+            last = now;
+          }
+        };
+        recognition.onstart = () => { recognizing = true; micStatus.textContent = 'On'; liveBtn.textContent = 'Stop Captions'; };
+        recognition.onend = () => { recognizing = false; micStatus.textContent = 'Off'; liveBtn.textContent = 'Enable Live Captions'; };
+        recognition.onerror = e => { console.warn(e); micStatus.textContent = 'Error'; recognition.stop(); };
+      } else {
+        liveBtn.title = 'Speech captions not supported in this browser';
+      }
+    } catch(e){ console.warn('Speech init error', e); }
 
     liveBtn.addEventListener('click', ()=>{
-      if(!recognition){ alert('Live speech captions not available in this browser.'); return; }
-      try{ recognition.start(); }catch(e){ console.warn(e); recognition.start(); }
-    });
-    speechToggle.addEventListener('click', ()=>{
-      if(recognizing) recognition.stop();
-      else recognition.start();
+      if(!recognition){ alert('Speech captions not supported (try desktop Chrome).'); return; }
+      if(!recognizing){ try{ recognition.start(); } catch(e){ recognition.start(); } }
+      else recognition.stop();
     });
 
-    /* ------------------------------
-       Small UX: 'Shop' button scroll to grid
-       ------------------------------ */
-    document.getElementById('startShop').addEventListener('click', ()=> {
-      document.querySelector('main').scrollIntoView({behavior:'smooth'});
+    // small UX buttons
+    $('#exploreBtn').addEventListener('click', ()=> productGrid.scrollIntoView({behavior:'smooth'}));
+    $('#shopNow').addEventListener('click', ()=> productGrid.scrollIntoView({behavior:'smooth'}));
+
+    // open modal when clicking image
+    productGrid.addEventListener('click', e => {
+      const img = e.target.closest('.thumb img');
+      if(!img) return;
+      const card = img.closest('.card');
+      const btn = card.querySelector('button[data-action="view"]');
+      if(btn) btn.click();
     });
 
-    /* ------------------------------
-       Theme button (tiny accent toggle)
-       ------------------------------ */
-    document.getElementById('themeBtn').addEventListener('click', ()=>{
-      document.documentElement.style.setProperty('--accent', getComputedStyle(document.documentElement).getPropertyValue('--accent-2') || '#ffd166');
-      document.getElementById('themeBtn').classList.add('pulse');
-      setTimeout(()=> document.getElementById('themeBtn').classList.remove('pulse'), 900);
-    });
-
-    /* ------------------------------
-       Keyboard accessibility: Esc to close modal
-       ------------------------------ */
-    document.addEventListener('keydown', e=>{
-      if(e.key === 'Escape') closeModal();
-    });
-
-    /* ------------------------------
-       Final: show simple toast on load (assignment hint)
-       ------------------------------ */
-    window.addEventListener('load', ()=>{
-      console.log('Assignment build by: Adhiraj Singh — adhiraj.232092@sggscc.ac.in');
-    });
   </script>
 </body>
 </html>
